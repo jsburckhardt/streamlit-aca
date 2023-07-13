@@ -28,7 +28,6 @@ jobs:
           npm install -g markdownlint
           npm install -g markdownlint-cli
           npm install -g cspell@latest
-          cd src/docusaurus
           make lint
           make spellcheck
           echo "Tests passed!"
