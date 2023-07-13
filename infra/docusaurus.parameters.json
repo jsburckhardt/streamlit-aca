@@ -6,10 +6,10 @@
         "value": "${AZURE_LOCATION}"
       },
       "name": {
-        "value": "${SERVICE_API_NAME}"
+        "value": "${SERVICE_DOCUSAURUS_NAME}"
       },
       "imageName": {
-        "value": "${SERVICE_API_IMAGE_NAME}"
+        "value": "${SERVICE_DOCUSAURUS_IMAGE_NAME}"
       },
       "containerAppsEnvironmentName": {
         "value": "${AZURE_CONTAINER_ENVIRONMENT_NAME}"

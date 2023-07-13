@@ -39,7 +39,7 @@ module containerApps 'core/host/container-apps.bicep' = {
 
 // API app
 module api 'docusaurus.bicep' = {
-  name: 'api'
+  name: 'docusaurus'
   scope: resourceGroup
   params: {
     name: replace('${take(prefix,19)}-ca', '--', '-')
@@ -67,8 +67,3 @@ output AZURE_LOCATION string = location
 output AZURE_CONTAINER_ENVIRONMENT_NAME string = containerApps.outputs.environmentName
 output AZURE_CONTAINER_REGISTRY_NAME string = containerApps.outputs.registryName
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerApps.outputs.registryLoginServer
-output SERVICE_API_IDENTITY_PRINCIPAL_ID string = api.outputs.SERVICE_API_IDENTITY_PRINCIPAL_ID
-output SERVICE_API_NAME string = api.outputs.SERVICE_API_NAME
-output SERVICE_API_URI string = api.outputs.SERVICE_API_URI
-output SERVICE_API_IMAGE_NAME string = api.outputs.SERVICE_API_IMAGE_NAME
-output SERVICE_API_ENDPOINTS array = ['${api.outputs.SERVICE_API_URI}/generate_name']

@@ -3,6 +3,6 @@ sidebar_position: 1
 slug: /
 ---
 
-# Landing Page
+# Sample Documentation
 
 Summary about your project

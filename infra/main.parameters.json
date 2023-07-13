@@ -9,7 +9,7 @@
       "value": "${AZURE_LOCATION}"
     },
     "apiAppExists": {
-      "value": "${SERVICE_API_RESOURCE_EXISTS=false}"
+      "value": "${SERVICE_DOCUSAURUS_RESOURCE_EXISTS=false}"
     }
   }
 }

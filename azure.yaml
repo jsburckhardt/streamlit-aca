@@ -13,3 +13,5 @@ services:
     project: ./src/docusaurus
     language: js
     host: containerapp
+    docker:
+      tag: project/docs:${DOCKER_IMAGE_TAG}
