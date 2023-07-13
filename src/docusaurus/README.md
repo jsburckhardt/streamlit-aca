@@ -5,7 +5,6 @@ This repository host a AZD Template for a product documentation template in Docu
 ## Local Development
 
 ```sh
-cd src/docusaurus
 make dev
 ```
 
@@ -14,18 +13,6 @@ This command starts a local development server and opens up a browser window. Mo
 ## Containerize
 
 ```sh
-cd src/docusaurus
-make package
-```
-
-## Getting familiar
-
-This project is based on [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator. Please visit the [Docusaurus documentation](https://v2.docusaurus.io/docs/) for more information.
-
-## Containerize
-
-```sh
-cd src/docusaurus
 make package
 ```
 
@@ -35,7 +22,6 @@ make package
 azd auth login
 azd config set defaults.location <location>
 azd config set defaults.subscription <yourSubscriptionID>
-
 azd up
 ```
 

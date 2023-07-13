@@ -5,7 +5,6 @@ on:
     # Set this to the mainline branch you are using
     branches:
       - main
-      - master
 
 # GitHub Actions workflow to deploy to Azure using azd
 # To configure required secrets for connecting to Azure, simply run `azd pipeline config`
@@ -17,6 +16,23 @@ permissions:
   contents: read
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Lint and spellcheck
+        run: |
+          echo "Running tests..."
+          npm install -g markdownlint
+          npm install -g markdownlint-cli
+          npm install -g cspell@latest
+          cd src/docusaurus
+          make lint
+          make spellcheck
+          echo "Tests passed!"
+
   build:
     runs-on: ubuntu-latest
     container:

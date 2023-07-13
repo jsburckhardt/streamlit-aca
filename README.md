@@ -1,75 +1,92 @@
-# Azure Developer CLI (azd) Bicep Starter
+# Docusaurus-aca (Docusaurus in Azure Container App)
 
-A starter blueprint for getting your application up on Azure using [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview) (azd). Add your application code, write Infrastructure as Code assets in [Bicep](https://aka.ms/bicep) to get your application up and running quickly.
+This repository includes a simple Docusaurus Site with a basic template for hosting product documentation. The repo structure is planned for developing using within the `[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)/codespaces` and deploy using [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
 
-The following assets have been provided:
+## Basic documentation structure
 
-- Infrastructure-as-code (IaC) Bicep files under the `infra` folder that demonstrate how to provision resources and setup resource tagging for azd.
-- A [dev container](https://containers.dev) configuration file under the `.devcontainer` directory that installs infrastructure tooling by default. This can be readily used to create cloud-hosted developer environments such as [GitHub Codespaces](https://aka.ms/codespaces).
-- Continuous deployment workflows for CI providers such as GitHub Actions under the `.github` directory, and Azure Pipelines under the `.azdo` directory that work for most use-cases.
+```bash
+src/docusaurus/docs
+├── 01-intro.md
+├── 02-getting-started
+├── 03-tutorials
+├── 04-docs
+└── 05-contributing
+```
 
-## Next Steps
+## Local Development
 
-### Step 1: Add application code
+All dependencies are installed as part of the devcontainer bootstrap. So, for starting the site:
 
-1. Initialize the service source code projects anywhere under the current directory. Ensure that all source code projects can be built successfully.
-    - > Note: For `function` services, it is recommended to initialize the project using the provided [quickstart tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started).
-2. Once all service source code projects are building correctly, update `azure.yaml` to reference the source code projects.
-3. Run `azd package` to validate that all service source code projects can be built and packaged locally.
+```bash
+cd src/docusaurus
+make dev
+```
 
-### Step 2: Provision Azure resources
+Now you can visit localhost:3000
 
-Update or add Bicep files to provision the relevant Azure resources. This can be done incrementally, as the list of [Azure resources](https://learn.microsoft.com/en-us/azure/?product=popular) are explored and added.
+### Linters and spellcheck
 
-- A reference library that contains all of the Bicep modules used by the azd templates can be found [here](https://github.com/Azure-Samples/todo-nodejs-mongo/tree/main/infra/core).
-- All Azure resources available in Bicep format can be found [here](https://learn.microsoft.com/en-us/azure/templates/).
+```bash
+make lint
+make spellcheck
+# fix common linting issues
+make lint-fix
+```
 
-Run `azd provision` whenever you want to ensure that changes made are applied correctly and work as expected.
+## Deploy to azure
 
-### Step 3: Tie in application and infrastructure
+Everything is deploy and manage through `AZD`. The main configuration file is `azure.yaml`. If you want to have a look into the schema and options please have a read [here](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-schema)
 
-Certain changes to Bicep files or deployment manifests are required to tie in application and infrastructure together. For example:
+### Step by step
 
-1. Set up [application settings](#application-settings) for the code running in Azure to connect to other Azure resources.
-1. If you are accessing sensitive resources in Azure, set up [managed identities](#managed-identities) to allow the code running in Azure to securely access the resources.
-1. If you have secrets, it is recommended to store secrets in [Azure Key Vault](#azure-key-vault) that then can be retrieved by your application, with the use of managed identities.
-1. Configure [host configuration](#host-configuration) on your hosting platform to match your application's needs. This may include networking options, security options, or more advanced configuration that helps you take full advantage of Azure capabilities.
+1. connect AZD to azure
 
-For more details, see [additional details](#additional-details) below.
+    ```bash
+    azd auth login
+    ```
 
-When changes are made, use azd to validate and apply your changes in Azure, to ensure that they are working as expected:
+2. validate the package is able to get containerize (will use latest tag -> if other tag required, please `export RELEASE_VERSION=<your tag>`). The pre package hook, will set the environment to tag the container image as `docusaurus-aca:<your tag>`.
 
-- Run `azd up` to validate both infrastructure and application code changes.
-- Run `azd deploy` to validate application code changes only.
+    ```bash
+    azd package
+    ```
 
-### Step 4: Up to Azure
+3. create the azure resources
 
-Finally, run `azd up` to run the end-to-end infrastructure provisioning (`azd provision`) and deployment (`azd deploy`) flow. Visit the service endpoints listed to see your application up-and-running!
+    ```bash
+    # when running the ocommand, you'll need to configure the subs/location
+    # by default the bicep templates will create a revision with a sample image
+    azd provision
+    ```
 
-## Additional Details
+4. deploy the application
 
-The following section examines different concepts that help tie in application and infrastructure.
+    ```bash
+    azd deploy
+    ```
 
-### Application settings
+### Short Cut
 
-It is recommended to have application settings managed in Azure, separating configuration from code. Typically, the service host allows for application settings to be defined.
+```bash
+azd up
+```
 
-- For `appservice` and `function`, application settings should be defined on the Bicep resource for the targeted host. Reference template example [here](https://github.com/Azure-Samples/todo-nodejs-mongo/tree/main/infra).
-- For `aks`, application settings are applied using deployment manifests under the `<service>/manifests` folder. Reference template example [here](https://github.com/Azure-Samples/todo-nodejs-mongo-aks/tree/main/src/api/manifests).
+## Configuring Github Workflow
 
-### Managed identities
+This will allow you to configure a service principal in azure and federate it to your github account. After you finish the configuration, you can see a set of variables set in the repository.
 
-[Managed identities](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) allows you to secure communication between services. This is done without having the need for you to manage any credentials.
+```bash
+azd pipeline config
+```
 
-### Azure Key Vault
+## Infrastructure
 
-[Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview) allows you to store secrets securely. Your application can access these secrets securely through the use of managed identities.
+All the infrastructure that is being deployed can be found in the `infra` directory. In summary it creates:
 
-### Host configuration
+- Azure Container App
+- Azure Container App Environment
+- Managed Identity (with pull role to the ACR)
+- Azure Container Registry
+- Log Analytics
 
-For `appservice`, the following host configuration options are often modified:
-
-- Language runtime version
-- Exposed port from the running container (if running a web service)
-- Allowed origins for CORS (Cross-Origin Resource Sharing) protection (if running a web service backend with a frontend)
-- The run command that starts up your service
+![Diagram of app architecture](readme_diagram.png)

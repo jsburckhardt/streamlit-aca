@@ -20,7 +20,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"postCreateCommand": "bash -c \"cd src/docusaurus && npm install && npm install --only=dev\"",
+	"postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
 
 	// Configure tool-specific properties.
 	"customizations": {
