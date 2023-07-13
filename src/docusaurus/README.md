@@ -32,10 +32,11 @@ make package
 ## Deploy to Azure
 
 ```sh
-cd src/docusaurus
 azd auth login
-azd config set defaults.location australiaeast
-make package
+azd config set defaults.location <location>
+azd config set defaults.subscription <yourSubscriptionID>
+
+azd up
 ```
 
 ## Getting familiar
