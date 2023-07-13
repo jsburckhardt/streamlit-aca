@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+# To learn more about the azure.yaml file, visit https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-schema
+
+name: docusaurus-aca
+metadata:
+  template: docusaurus-aca@0.0.1-beta
+hooks:
+  prepackage: # Example of an inline script. (shell is required for inline scripts)
+    shell: sh
+    run: ./hooks/prepackage.sh
+services:
+  docusaurus:
+    project: ./src/docusaurus
+    language: js
+    host: containerapp
+    docker:
+      tag: docusaurus-aca:${DOCKER_IMAGE_TAG=latest}
