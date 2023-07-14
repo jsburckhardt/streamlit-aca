@@ -1,6 +1,6 @@
 # Docusaurus-aca (Docusaurus in Azure Container App)
 
-This repository includes a simple Docusaurus Site with a basic template for hosting product documentation. The repo structure is planned for developing using within the `[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)/codespaces` and deploy using [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
+This repository includes a simple Docusaurus Site with a basic template for hosting product documentation. The repo structure is planned for developing using within the `[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)/codespaces)` and deploy using [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
 
 ## Basic documentation structure
 
