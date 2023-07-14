@@ -49,7 +49,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/jsburckhardt/docusaurus-aca/blob/main/src/docusaurus/docs/',
+            'https://github.com/jsburckhardt/docusaurus-aca/blob/main/src/docusaurus/',
         },
         blog: false,
         theme: {
