@@ -18,7 +18,6 @@ src/docusaurus/docs
 All dependencies are installed as part of the devcontainer bootstrap. So, for starting the site:
 
 ```bash
-cd src/docusaurus
 make dev
 ```
 
