@@ -4,17 +4,20 @@ This repository host a AZD Template for a product documentation template in Docu
 
 ## Local Development
 
+If running it from `src/docusaurus` path, run:
+
+```sh
+npx docusaurus start
+```
+
+if running it from the root of the repository, run:
+
+
 ```sh
 make dev
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Containerize
-
-```sh
-make package
-```
 
 ## Deploy to Azure
 
