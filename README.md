@@ -53,7 +53,7 @@ Everything is deploy and manage through `AZD`. The main configuration file is `a
 3. create the azure resources
 
     ```bash
-    # when running the ocommand, you'll need to configure the subs/location
+    # when running the command, you'll need to configure the subs/location
     # by default the bicep templates will create a revision with a sample image
     azd provision
     ```
