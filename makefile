@@ -11,19 +11,11 @@ else
 endif
 
 lint:
-	npx markdownlint "src/docusaurus/docs/**/*.md"
+	npx markdownlint "src/streamlit/docs/**/*.md"
 	npx markdownlint "README.md"
-
-spellcheck:
-	npx cspell "src/docusaurus/docs/**/*.md"
-	npx cspell README.md
-
-fix-lint:
-	@npx markdownlint --fix "src/docusaurus/docs/**/*.md"
-	@npx markdownlint --fix "README.md"
 
 .ONESHELL:
 
 dev:
-	cd src/docusaurus
-	npx docusaurus start
+	cd src/streamlit-example
+	streamlit run streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false

@@ -38,8 +38,8 @@ module containerApps 'core/host/container-apps.bicep' = {
 }
 
 // API app
-module api 'docusaurus.bicep' = {
-  name: 'docusaurus'
+module api 'app.bicep' = {
+  name: 'app'
   scope: resourceGroup
   params: {
     name: replace('${take(prefix,19)}-ca', '--', '-')

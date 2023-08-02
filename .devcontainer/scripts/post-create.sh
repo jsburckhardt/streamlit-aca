@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-npm install -g markdownlint
-npm install -g markdownlint-cli
-npm install -g cspell@latest
-cd src/docusaurus && npm install && npm install --only=dev
+# install black
+pip3 install --user black
+cd src/streamlit-example && pip3 install --user -r requirements.txt

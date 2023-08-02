@@ -1,17 +1,6 @@
-# Docusaurus-aca (Docusaurus in Azure Container App)
+# Streamlit-aca (Streamlit in Azure Container App)
 
-This repository includes a simple Docusaurus Site with a basic template for hosting product documentation. The repo structure is planned for developing using within the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)/[Codespaces](https://code.visualstudio.com/docs/remote/codespaces) and deploy using [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
-
-## Basic documentation structure
-
-```bash
-src/docusaurus/docs
-├── 01-intro.md
-├── 02-getting-started
-├── 03-tutorials
-├── 04-docs
-└── 05-contributing
-```
+This repository includes the [streamlit-example](https://github.com/streamlit/streamlit-example/tree/master) Site. The repo structure is planned for developing using within the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)/[Codespaces](https://code.visualstudio.com/docs/remote/codespaces) and deploy using [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
 
 ## Local Development
 
@@ -21,13 +10,12 @@ All dependencies are installed as part of the devcontainer bootstrap. So, for st
 make dev
 ```
 
-Now you can visit localhost:3000
+Now you can visit localhost:8085
 
-### Linters and spellcheck
+### Linters
 
 ```bash
 make lint
-make spellcheck
 # fix common linting issues
 make lint-fix
 ```
@@ -44,7 +32,7 @@ Everything is deploy and manage through `AZD`. The main configuration file is `a
     azd auth login
     ```
 
-2. validate the package is able to get containerize (will use latest tag -> if other tag required, please `export RELEASE_VERSION=<your tag>`). The pre package hook, will set the environment to tag the container image as `docusaurus-aca:<your tag>`.
+2. validate the package is able to get containerize (will use latest tag -> if other tag required, please `export RELEASE_VERSION=<your tag>`). The pre package hook, will set the environment to tag the container image as `streamlit-aca:<your tag>`.
 
     ```bash
     azd package
