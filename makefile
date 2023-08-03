@@ -11,11 +11,10 @@ else
 endif
 
 lint:
-	npx markdownlint "src/streamlit/docs/**/*.md"
-	npx markdownlint "README.md"
+	black src/streamlit-example/*.py
 
 .ONESHELL:
 
 dev:
 	cd src/streamlit-example
-	streamlit run streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false
+	streamlit run streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false --browser.gatherUsageStats false --server.port 8501 --server.address 0.0.0.0

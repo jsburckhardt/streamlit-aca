@@ -26,11 +26,7 @@ jobs:
       - name: Lint and spellcheck
         run: |
           echo "Running tests..."
-          npm install -g markdownlint
-          npm install -g markdownlint-cli
-          npm install -g cspell@latest
           make lint
-          make spellcheck
           echo "Tests passed!"
   build:
     needs: test

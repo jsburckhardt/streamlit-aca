@@ -30,11 +30,17 @@
 					"zsh": {
 						"path": "/bin/zsh"
 					}
+				},
+				"python.formatting.provider": "black",
+				"editor.formatOnSave": true,
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
 				}
 			},
 			"extensions": [
 				"ms-python.python",
         		"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
 				"eamodio.gitlens",
 				"GitHub.vscode-github-actions",
 				"ms-azuretools.vscode-docker",
@@ -42,7 +48,9 @@
 				"shardulm94.trailing-spaces",
                 "ms-azuretools.azure-dev",
                 "ms-azuretools.vscode-bicep",
-                "ms-azuretools.vscode-docker"
+                "ms-azuretools.vscode-docker",
+				"github.copilot",
+				"github.copilot-chat"
 			]
 		}
 	},
@@ -50,6 +58,6 @@
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
 	"mounts": [
-		"source=${env:HOME}${env:USERPROFILE}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
+		"source=${env:HOME}${env:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
 	]
 }
