@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.35.1.17967",
-      "templateHash": "15787450675129480163"
+      "templateHash": "1259583455315774327"
     }
   },
   "parameters": {
@@ -81,7 +81,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.35.1.17967",
-              "templateHash": "17305006385217665134"
+              "templateHash": "15594654627630515198"
             }
           },
           "parameters": {
@@ -144,7 +144,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.35.1.17967",
-                      "templateHash": "4421601480800002222"
+                      "templateHash": "2621305704993539424"
                     }
                   },
                   "parameters": {
@@ -174,7 +174,7 @@
                   "resources": [
                     {
                       "type": "Microsoft.App/managedEnvironments",
-                      "apiVersion": "2022-03-01",
+                      "apiVersion": "2023-05-01",
                       "name": "[parameters('name')]",
                       "location": "[parameters('location')]",
                       "tags": "[parameters('tags')]",
@@ -186,14 +186,14 @@
                             "sharedKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsWorkspaceName')), '2022-10-01').primarySharedKey]"
                           }
                         },
-                        "daprAIInstrumentationKey": "[if(and(parameters('daprEnabled'), not(empty(parameters('applicationInsightsName')))), reference(resourceId('Microsoft.Insights/components', parameters('applicationInsightsName')), '2020-02-02').InstrumentationKey, '')]"
+                        "daprAIInstrumentationKey": "[if(and(parameters('daprEnabled'), not(empty(parameters('applicationInsightsName')))), reference(resourceId('Microsoft.Insights/components', parameters('applicationInsightsName')), '2020-02-02-preview').InstrumentationKey, '')]"
                       }
                     }
                   ],
                   "outputs": {
                     "defaultDomain": {
                       "type": "string",
-                      "value": "[reference(resourceId('Microsoft.App/managedEnvironments', parameters('name')), '2022-03-01').defaultDomain]"
+                      "value": "[reference(resourceId('Microsoft.App/managedEnvironments', parameters('name')), '2023-05-01').defaultDomain]"
                     },
                     "name": {
                       "type": "string",
@@ -230,7 +230,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.35.1.17967",
-                      "templateHash": "9389484676277427673"
+                      "templateHash": "16174188727172854565"
                     }
                   },
                   "parameters": {
@@ -248,10 +248,6 @@
                     "adminUserEnabled": {
                       "type": "bool",
                       "defaultValue": true
-                    },
-                    "anonymousPullEnabled": {
-                      "type": "bool",
-                      "defaultValue": false
                     },
                     "dataEndpointEnabled": {
                       "type": "bool",
@@ -292,14 +288,13 @@
                   "resources": [
                     {
                       "type": "Microsoft.ContainerRegistry/registries",
-                      "apiVersion": "2022-02-01-preview",
+                      "apiVersion": "2023-07-01",
                       "name": "[parameters('name')]",
                       "location": "[parameters('location')]",
                       "tags": "[parameters('tags')]",
                       "sku": "[parameters('sku')]",
                       "properties": {
                         "adminUserEnabled": "[parameters('adminUserEnabled')]",
-                        "anonymousPullEnabled": "[parameters('anonymousPullEnabled')]",
                         "dataEndpointEnabled": "[parameters('dataEndpointEnabled')]",
                         "encryption": "[parameters('encryption')]",
                         "networkRuleBypassOptions": "[parameters('networkRuleBypassOptions')]",
@@ -341,7 +336,7 @@
                   "outputs": {
                     "loginServer": {
                       "type": "string",
-                      "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', parameters('name')), '2022-02-01-preview').loginServer]"
+                      "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', parameters('name')), '2023-07-01').loginServer]"
                     },
                     "name": {
                       "type": "string",
@@ -417,7 +412,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.35.1.17967",
-              "templateHash": "11484893107510261155"
+              "templateHash": "15254787188869914721"
             }
           },
           "parameters": {
@@ -498,7 +493,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.35.1.17967",
-                      "templateHash": "3284728754856843664"
+                      "templateHash": "10559601327941701556"
                     }
                   },
                   "parameters": {
@@ -676,7 +671,7 @@
                           "env": {
                             "value": "[parameters('env')]"
                           },
-                          "imageName": "[if(parameters('exists'), createObject('value', reference(resourceId('Microsoft.App/containerApps', parameters('name')), '2022-03-01').template.containers[0].image), createObject('value', ''))]",
+                          "imageName": "[if(parameters('exists'), createObject('value', reference(resourceId('Microsoft.App/containerApps', parameters('name')), '2023-05-01').template.containers[0].image), createObject('value', ''))]",
                           "targetPort": {
                             "value": "[parameters('targetPort')]"
                           }
@@ -688,7 +683,7 @@
                             "_generator": {
                               "name": "bicep",
                               "version": "0.35.1.17967",
-                              "templateHash": "12702194491713077629"
+                              "templateHash": "5266510054317717113"
                             }
                           },
                           "parameters": {
@@ -804,7 +799,7 @@
                           "resources": [
                             {
                               "type": "Microsoft.App/containerApps",
-                              "apiVersion": "2022-03-01",
+                              "apiVersion": "2023-05-01",
                               "name": "[parameters('name')]",
                               "location": "[parameters('location')]",
                               "tags": "[parameters('tags')]",
@@ -908,7 +903,7 @@
                           "outputs": {
                             "defaultDomain": {
                               "type": "string",
-                              "value": "[reference(resourceId('Microsoft.App/managedEnvironments', parameters('containerAppsEnvironmentName')), '2022-03-01').defaultDomain]"
+                              "value": "[reference(resourceId('Microsoft.App/managedEnvironments', parameters('containerAppsEnvironmentName')), '2023-05-01').defaultDomain]"
                             },
                             "imageName": {
                               "type": "string",
@@ -920,7 +915,7 @@
                             },
                             "uri": {
                               "type": "string",
-                              "value": "[format('https://{0}', reference(resourceId('Microsoft.App/containerApps', parameters('name')), '2022-03-01').configuration.ingress.fqdn)]"
+                              "value": "[format('https://{0}', reference(resourceId('Microsoft.App/containerApps', parameters('name')), '2023-05-01').configuration.ingress.fqdn)]"
                             }
                           }
                         }
@@ -1005,7 +1000,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.35.1.17967",
-              "templateHash": "14144532945834467774"
+              "templateHash": "12972941386306985866"
             }
           },
           "parameters": {
@@ -1024,7 +1019,7 @@
           "resources": [
             {
               "type": "Microsoft.OperationalInsights/workspaces",
-              "apiVersion": "2021-12-01-preview",
+              "apiVersion": "2022-10-01",
               "name": "[parameters('name')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
