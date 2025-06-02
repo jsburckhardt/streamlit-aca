@@ -71,7 +71,7 @@ resource apimLogger 'Microsoft.ApiManagement/service/loggers@2021-12-01-preview'
   }
 }
 
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing = if (!empty(applicationInsightsName)) {
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02-preview' existing = if (!empty(applicationInsightsName)) {
   name: applicationInsightsName
 }
 
